@@ -71,15 +71,23 @@ func main() {
 		setupAPIRoutes(r)
 		r.NoRoute(func(c *gin.Context) {
 			if c.Request.Method == "GET" {
-				// 如果路径以 /api 开头，则返回404
-				if strings.HasPrefix(c.Request.URL.Path, "/api") {
+				path := c.Request.URL.Path
+				
+				// 如果请求的是API路径，返回404
+				if strings.HasPrefix(path, "/api") {
 					c.JSON(http.StatusNotFound, gin.H{"error": "API endpoint not found"})
 					return
 				}
 				
-				// 对于前端路由，总是返回index.html
+				// 检查请求的文件是否存在
+				_, err := uiFS.Open(path[1:]) // 去掉前导斜杠
+				if err != nil {
+					// 文件不存在，返回index.html处理前端路由
+					c.Request.URL.Path = "/"
+				}
+				
+				// 提供静态文件服务
 				fileServer := http.FileServer(http.FS(uiFS))
-				c.Request.URL.Path = "/"
 				fileServer.ServeHTTP(c.Writer, c.Request)
 				return
 			}
