@@ -1,6 +1,8 @@
 {
   "debug": false,
+  "server_port": ":9099",
   "load_balancing": "random",
+  "enable_web": true,
   "services": {
     "xinghuo": [
       {
