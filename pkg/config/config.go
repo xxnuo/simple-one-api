@@ -4,15 +4,16 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/google/uuid"
-	"go.uber.org/zap"
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"simple-one-api/pkg/mylog"
 	"simple-one-api/pkg/utils"
 	"sort"
 	"strings"
+
+	"github.com/google/uuid"
+	"go.uber.org/zap"
+	"gopkg.in/yaml.v3"
 )
 
 var GSOAConf *Configuration
@@ -112,6 +113,11 @@ type ModelDetails struct {
 	ServiceName  string `json:"service_name" yaml:"service_name"`
 	ServiceModel `json:",inline" yaml:",inline"`
 	ServiceID    string `json:"service_id" yaml:"service_id"`
+}
+
+// CreateModelToServiceMap 公开的模型到服务映射创建函数
+func CreateModelToServiceMap(config Configuration) map[string][]ModelDetails {
+	return createModelToServiceMap(config)
 }
 
 // 创建模型到服务的映射

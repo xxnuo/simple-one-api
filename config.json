@@ -1,76 +1,266 @@
 {
-  "debug": false,
   "server_port": ":9099",
+  "debug": false,
+  "log_level": "",
+  "proxy": {
+    "strategy": "",
+    "type": "",
+    "http_proxy": "",
+    "https_proxy": "",
+    "socks5_proxy": "",
+    "timeout": 0
+  },
+  "api_key": "xxxx",
   "load_balancing": "random",
-  "enable_web": true,
+  "multi_content_models": null,
+  "model_redirect": null,
+  "params_range": null,
   "services": {
-    "xinghuo": [
-      {
-        "models": ["spark-lite"],
-        "enabled": true,
-        "credentials": {
-          "appid": "xxx",
-          "api_key": "xxx",
-          "api_secret": "xxx"
-        }
-      }
-    ],
-    "qianfan": [
-      {
-        "models": ["yi_34b_chat","ERNIE-Speed-8K","ERNIE-Speed-128K","ERNIE-Lite-8K","ERNIE-Lite-8K-0922","ERNIE-Tiny-8K"],
-        "enabled": true,
-        "credentials": {
-          "api_key": "xxx",
-          "secret_key": "xxx"
-        }
-      }
-    ],
     "hunyuan": [
       {
-        "models": ["hunyuan-lite"],
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "hunyuan-lite"
+        ],
+        "reasoning_models": null,
         "enabled": true,
         "credentials": {
           "secret_id": "xxx",
           "secret_key": "xxx"
-        }
-      }
-    ],
-    "openai": [
-      {
-        "models": ["deepseek-chat"],
-        "enabled": true,
-        "credentials": {
-          "api_key": "xxx"
         },
-        "server_url":"https://api.deepseek.com/v1"
-      },
-      {
-        "models": ["@cf/meta/llama-2-7b-chat-int8"],
-        "enabled": true,
-        "credentials": {
-          "api_key": "xxx"
+        "credential_list": null,
+        "server_url": "",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
         },
-        "server_url": "https://api.cloudflare.com/client/v4/accounts/xxx/ai/v1/chat/completions"
-      },
-      {
-        "models": ["glm-4","glm-3-turbo"],
-        "enabled": true,
-        "credentials": {
-          "api_key": "xxx"
-        },
-        "server_url":"https://open.bigmodel.cn/api/paas/v4/chat/completions"
+        "timeout": 0
       }
     ],
     "minimax": [
       {
-        "models": ["abab6-chat"],
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "abab6-chat"
+        ],
+        "reasoning_models": null,
         "enabled": true,
         "credentials": {
-          "group_id": "1782658868262748467",
+          "api_key": "xxx",
+          "group_id": "1782658868262748467"
+        },
+        "credential_list": null,
+        "server_url": "https://api.minimax.chat/v1/text/chatcompletion_pro",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "timeout": 0
+      }
+    ],
+    "openai": [
+      {
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "deepseek-chat"
+        ],
+        "reasoning_models": null,
+        "enabled": true,
+        "credentials": {
           "api_key": "xxx"
         },
-        "server_url":"https://api.minimax.chat/v1/text/chatcompletion_pro"
+        "credential_list": null,
+        "server_url": "https://api.deepseek.com/v1",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "timeout": 0
+      },
+      {
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "@cf/meta/llama-2-7b-chat-int8"
+        ],
+        "reasoning_models": null,
+        "enabled": true,
+        "credentials": {
+          "api_key": "xxx"
+        },
+        "credential_list": null,
+        "server_url": "https://api.cloudflare.com/client/v4/accounts/xxx/ai/v1/chat/completions",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "timeout": 0
+      },
+      {
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "glm-4",
+          "glm-3-turbo"
+        ],
+        "reasoning_models": null,
+        "enabled": true,
+        "credentials": {
+          "api_key": "xxx"
+        },
+        "credential_list": null,
+        "server_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "timeout": 0
+      }
+    ],
+    "qianfan": [
+      {
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "yi_34b_chat",
+          "ERNIE-Speed-8K",
+          "ERNIE-Speed-128K",
+          "ERNIE-Lite-8K",
+          "ERNIE-Lite-8K-0922",
+          "ERNIE-Tiny-8K"
+        ],
+        "reasoning_models": null,
+        "enabled": true,
+        "credentials": {
+          "api_key": "xxx",
+          "secret_key": "xxx"
+        },
+        "credential_list": null,
+        "server_url": "",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "timeout": 0
+      }
+    ],
+    "xinghuo": [
+      {
+        "provider": "",
+        "embedding_models": null,
+        "embedding_limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "models": [
+          "spark-lite"
+        ],
+        "reasoning_models": null,
+        "enabled": true,
+        "credentials": {
+          "api_key": "xxx",
+          "api_secret": "xxx",
+          "appid": "xxx"
+        },
+        "credential_list": null,
+        "server_url": "",
+        "model_map": null,
+        "model_redirect": null,
+        "limit": {
+          "qps": 0,
+          "qpm": 0,
+          "rpm": 0,
+          "concurrency": 0,
+          "timeout": 0
+        },
+        "timeout": 0
       }
     ]
-  }
+  },
+  "translation": {
+    "enable": false,
+    "promptTemplate": "",
+    "retry": 0,
+    "concurrency": 0
+  },
+  "enable_web": true,
+  "api_keys": null
 }

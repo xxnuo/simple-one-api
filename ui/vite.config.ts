@@ -11,4 +11,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      '/admin': {
+        target: 'http://localhost:9099',
+        changeOrigin: true,
+      },
+      '/v1': {
+        target: 'http://localhost:9099',
+        changeOrigin: true,
+      }
+    }
+  }
 })

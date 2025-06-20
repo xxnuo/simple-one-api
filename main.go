@@ -18,6 +18,8 @@ import (
 	"os"
 	"simple-one-api/pkg/config"
 	"simple-one-api/pkg/handler"
+	"simple-one-api/pkg/middleware"
+	"strings"
 	"time"
 )
 
@@ -69,7 +71,15 @@ func main() {
 		setupAPIRoutes(r)
 		r.NoRoute(func(c *gin.Context) {
 			if c.Request.Method == "GET" {
+				// 如果路径以 /api 开头，则返回404
+				if strings.HasPrefix(c.Request.URL.Path, "/api") {
+					c.JSON(http.StatusNotFound, gin.H{"error": "API endpoint not found"})
+					return
+				}
+				
+				// 对于前端路由，总是返回index.html
 				fileServer := http.FileServer(http.FS(uiFS))
+				c.Request.URL.Path = "/"
 				fileServer.ServeHTTP(c.Writer, c.Request)
 				return
 			}
@@ -92,6 +102,14 @@ func setupAPIRoutes(r *gin.Engine) {
 	r.POST("/v2/translate", translation.TranslateV2Handler)
 	r.POST("/translate", translation.TranslateV1Handler)
 	r.GET("/multimodelcall", mywebui.WSMultiModelCallHandler)
+
+	// 配置管理API路由，需要鉴权
+	adminGroup := r.Group("/admin")
+	adminGroup.Use(middleware.AdminAuth())
+	{
+		adminGroup.GET("/config", apis.GetConfigHandler)
+		adminGroup.POST("/config", apis.UpdateConfigHandler)
+	}
 
 	v1 := r.Group("/v1")
 	{
